@@ -1,0 +1,11 @@
+{
+    "name": "nautilus/mvc-library",
+    "description": "library management app",
+    "require": {
+        "torophp/torophp": "dev-master",
+        "twig/twig": "^3.0"
+    },
+    "autoload": {
+        "classmap": ["app"]
+    }
+}
