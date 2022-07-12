@@ -18,6 +18,7 @@ class ChangePassword{
     }else{
         $salt = bin2hex(random_bytes(4));
         $hash= hash("sha256",$newPass.$salt);
+        $hash= \Model\User::get_hash($newPass,$salt);
         \Model\User::changePassword($_SESSION['uname'],$salt,$hash);
         echo "Password Changed successfully.";
     }

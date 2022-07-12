@@ -5,23 +5,23 @@ namespace Model;
 class Post {
     public static function create($caption) {
         $db = \DB::get_instance();
-        $stmt = $db->prepare("INSERT INTO posts (caption) VALUES (?)");
-        $stmt->execute([$caption]);
+        $statement = $db->prepare("INSERT INTO posts (caption) VALUES (?)");
+        $statement->execute([$caption]);
     }
 
     public static function get_all() {
         $db = \DB::get_instance();
-        $stmt = $db->prepare("SELECT * FROM posts");
-        $stmt->execute();
-        $rows = $stmt->fetchAll();
+        $statement = $db->prepare("SELECT * FROM posts");
+        $statement->execute();
+        $rows = $statement->fetchAll();
         return $rows;
     }
 
     public static function find($id) {
         $db = \DB::get_instance();
-        $stmt = $db->prepare("SELECT * FROM posts WHERE id = ?");
-        $stmt->execute([$id]);
-        $row = $stmt->fetch();
+        $statement = $db->prepare("SELECT * FROM posts WHERE id = ?");
+        $statement->execute([$id]);
+        $row = $statement->fetch();
         return $row;
     }
 }

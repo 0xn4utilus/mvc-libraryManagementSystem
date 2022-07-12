@@ -17,7 +17,7 @@ class Register{
             $password = $_POST['password'];
             $passwordC = $_POST['passwordC'];
             $salt = bin2hex(random_bytes(4));
-            $hash= hash("sha256",$password.$salt);
+            $hash= \Model\User::get_hash($password,$salt);
             
         }
         
