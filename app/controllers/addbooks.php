@@ -62,7 +62,7 @@ class Addbooks
                 $bookname = $_POST["bookname"];
                 $copies = $_POST["copies"];
                 $bookdescription = $_POST["bookdescription"];
-                if (\Model\Books::isbn_exists($isbn)) {
+                if (\Controller\Utils::isbn_exists($isbn)) {
                     echo "ISBN already exists";
                     unlink($target_file);
                 } else {

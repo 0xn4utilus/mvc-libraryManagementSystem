@@ -24,7 +24,7 @@ class Register{
         if($password!=$passwordC){
             echo "Passwords didn't match";
             return;
-        }elseif(!\Model\User::user_exists($name)){
+        }elseif(!\Controller\Utils::user_exists($name)){
             \Model\User::new_user($name,$salt,$hash);
             $_SESSION['uname'] = $_POST['uname'];
             $_SESSION['admin'] = \Model\User::is_admin($_POST['uname']);

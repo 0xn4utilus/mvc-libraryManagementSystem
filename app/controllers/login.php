@@ -9,7 +9,7 @@ class Login {
 
         if(!isset($_POST['uname']) && !isset($_POST['password'])){
             echo 'All fields are required';
-        }elseif(\Model\User::authenticate_user($_POST['uname'],$_POST['password'])){
+        }elseif(\Controller\Utils::authenticate_user($_POST['uname'],$_POST['password'])){
             $_SESSION['uname'] = $_POST['uname'];
             $_SESSION['admin'] = \Model\User::is_admin($_POST['uname']);
             $sessionId = base64_encode(random_bytes(16));
@@ -19,6 +19,7 @@ class Login {
         }else{
             echo 'Either user does not exist or user and password do not match';
         }
+
 
     }
 }

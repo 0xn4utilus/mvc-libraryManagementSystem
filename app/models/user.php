@@ -23,28 +23,12 @@ class User {
         return $row[0]['admin'];
     }
 
-    public static function authenticate_user($uname,$password){
+    public static function get_user($uname){
         $db = \DB::get_instance();
         $statement = $db->prepare("SELECT * FROM users where uname = ?");
         $statement->execute([$uname]);
-        $row  = $statement->fetchAll();
-        if(!isset($row[0])){
-            return FALSE;
-        }
-        if($row[0]['password'] == \Model\User::get_hash($password,$row[0]['salt']) ){
-            return TRUE;
-        }
-        return FALSE;
-    }
-    public static function user_exists($uname){
-        $db = \DB::get_instance();
-        $statement = $db->prepare("SELECT * FROM users where uname = ?");
-        $statement->execute([$uname]);
-        $row  = $statement->fetchAll();
-        if(!isset($row[0])){
-            return FALSE;
-        }
-        return TRUE;
+        $rows  = $statement->fetchAll();
+        return $rows;
     }
 
     public static function new_cookie($sessionId,$uname){

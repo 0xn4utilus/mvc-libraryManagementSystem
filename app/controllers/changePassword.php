@@ -13,7 +13,7 @@ class ChangePassword{
     }elseif($newPassC!= $newPass){
         echo "Passwords doesn't match";
         return;
-    }elseif(!\Model\User::authenticate_user($_SESSION['uname'],$currPass)){
+    }elseif(!\Controller\Utils::authenticate_user($_SESSION['uname'],$currPass)){
         echo "Incorrect Password!";
     }else{
         $salt = bin2hex(random_bytes(4));

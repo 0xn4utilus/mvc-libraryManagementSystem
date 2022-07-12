@@ -40,15 +40,13 @@ class Books{
         return $rows;
     }
 
-    public static function isbn_exists($isbn){
+    public static function get_book_info($isbn){
         $db = \DB::get_instance();
         $statement = $db->prepare("SELECT * from books where isbn = ?");
         $statement->execute([$isbn]);
         $rows  = $statement->fetchAll();
-        if(isset($rows[0])){
-            return TRUE;
-        }
-        return FALSE;
+        return $rows;
+        
     }
 
     public static function addbooks($isbn,$bookname,$imgsrc,$bookdescription,$copies){
