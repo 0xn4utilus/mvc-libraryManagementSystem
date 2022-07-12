@@ -76,22 +76,14 @@ class Books{
 
     public static function approveissues($isbn,$uname){
         $db = \DB::get_instance();
-        $statement1 = $db->prepare("INSERT into issuedbooks values (?,?)");
-        $statement1->execute([$isbn,$uname]);
-        $statement2 = $db->prepare("update books set copies=copies-1 where isbn=?");
-        $statement2->execute([$isbn]);
-        $statement3 = $db->prepare("delete from requests where status = 'issue' and isbn=? and uname=?");
-        $statement3->execute([$isbn,$uname]);
+        $statement = $db->prepare("INSERT into issuedbooks values (?,?);update books set copies=copies-1 where isbn=?;delete from requests where status = 'issue' and isbn=? and uname=?");
+        $statement->execute([$isbn,$uname,$isbn,$isbn,$uname]);
 
     }
     public static function approveReturnRequests($isbn,$uname){
         $db = \DB::get_instance();
-        $statement1 = $db->prepare("delete from requests where status='return' and isbn=? and uname=?");
-        $statement1->execute([$isbn,$uname]);
-        $statement2 = $db->prepare("update books set copies=copies+1 where isbn=?");
-        $statement2->execute([$isbn]);
-        $statement3 = $db->prepare("delete from issuedbooks where isbn=? and uname=?");
-        $statement3->execute([$isbn,$uname]);
+        $statement = $db->prepare("delete from requests where status='return' and isbn=? and uname=?;update books set copies=copies+1 where isbn=?;delete from issuedbooks where isbn=? and uname=?");
+        $statement->execute([$isbn,$uname,$isbn,$isbn,$uname]);
 
     }
 
