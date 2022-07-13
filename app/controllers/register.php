@@ -17,20 +17,20 @@ class Register{
             $password = $_POST['password'];
             $passwordC = $_POST['passwordC'];
             $salt = bin2hex(random_bytes(4));
-            $hash= \Model\User::get_hash($password,$salt);
+            $hash= \Model\User::getHash($password,$salt);
             
         }
         
         if($password!=$passwordC){
             echo "Passwords didn't match";
             return;
-        }elseif(!\Controller\Utils::user_exists($name)){
-            \Model\User::new_user($name,$salt,$hash);
+        }elseif(!\Controller\Utils::userExists($name)){
+            \Model\User::newUser($name,$salt,$hash);
             $_SESSION['uname'] = $_POST['uname'];
-            $_SESSION['admin'] = \Model\User::is_admin($_POST['uname']);
+            $_SESSION['admin'] = \Model\User::isAdmin($_POST['uname']);
             $sessionId = base64_encode(random_bytes(16));
             setcookie('sessionId',$sessionId,time()+60*60*24*30);
-            \Model\User::new_cookie($sessionId,$_POST['uname']);
+            \Model\User::newCookie($sessionId,$_POST['uname']);
             header('Location: /user');
         }else{
             echo "Username is not unique";

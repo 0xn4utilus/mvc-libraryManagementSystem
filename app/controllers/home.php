@@ -8,10 +8,10 @@ class Home {
         
         if (isset($_COOKIE["sessionId"])){
             // $_SESSION['uname']
-            $res = \Model\User::authenticate_cookie($_COOKIE["sessionId"]);
+            $res = \Model\User::authenticateCookie($_COOKIE["sessionId"]);
             
             if(isset($res[0])){
-                $_SESSION['admin'] = \Model\User::is_admin($res[0]['uname']);
+                $_SESSION['admin'] = \Model\User::isAdmin($res[0]['uname']);
                 $_SESSION['uname']= $res[0]['uname'];
             }
         }
@@ -20,7 +20,7 @@ class Home {
             header('Location: /user');
         }else{
             echo \View\Loader::make()->render("templates/index.twig", array(
-                "totalbooks" => \Model\Books::total_books(),
+                "total_books" => \Model\Books::totalBooks(),
             ));
         }
         

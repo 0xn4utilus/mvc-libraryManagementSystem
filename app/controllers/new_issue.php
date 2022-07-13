@@ -2,10 +2,10 @@
 
 namespace Controller;
 
-class Newissue{
+class NewIssue{
     public function post(){
         session_start();
-        \Model\Books::newissue($_POST['isbn'],$_SESSION['uname']);
+        \Model\Books::newIssue($_POST['isbn'],$_SESSION['uname']);
 
         echo "Admin will approve your issue request";
     }

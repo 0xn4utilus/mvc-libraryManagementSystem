@@ -2,10 +2,10 @@
 
 namespace Controller;
 
-class Newreturn{
+class NewReturn{
     public function post(){
         session_start();
-        \Model\Books::newreturn($_POST['isbn'],$_SESSION['uname']);
+        \Model\Books::newReturn($_POST['isbn'],$_SESSION['uname']);
 
         echo "Admin will approve your return request";
     }

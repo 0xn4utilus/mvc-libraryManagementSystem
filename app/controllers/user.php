@@ -12,10 +12,10 @@ class User{
             header('Location: /admin');
         }else{
             echo \View\Loader::make()->render("templates/user.twig", array(
-                "totalbooks" => \Model\Books::total_books(),
+                "total_books" => \Model\Books::totalBooks(),
                 "uname" => $_SESSION['uname'],
-                "issuedbooks"=> \Model\Books::issuedbooks($_SESSION['uname']),
-                "newissuebooks"=>\Model\Books::newissuebooks($_SESSION['uname']),
+                "issued_books"=> \Model\Books::issuedBooks($_SESSION['uname']),
+                "new_issue_books"=>\Model\Books::newIssueBooks($_SESSION['uname']),
             ));
         }
     }

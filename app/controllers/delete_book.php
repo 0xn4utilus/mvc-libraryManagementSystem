@@ -2,12 +2,12 @@
 
 namespace Controller;
 
-class Deletebook{
+class DeleteBook{
     public function post(){
         session_start();
         
         
-        if(\Model\User::is_admin($_SESSION['uname'])==0){
+        if(\Model\User::isAdmin($_SESSION['uname'])==0){
             header('Location: /');
         }else{
             $isbn = $_POST['isbn'];

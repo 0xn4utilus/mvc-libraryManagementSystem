@@ -2,65 +2,66 @@
 
 namespace Controller;
 
-class Editbook{
+class EditBook{
     public static function post(){
+        session_start();
 
-        if(\Model\User::is_admin($_SESSION['uname'])==0){
+        if(\Model\User::isAdmin($_SESSION['uname'])==0){
             header('Location: /');
         }else{
-            if(file_exists($_FILES['bookcover']['tmp_name'])){
+            if(file_exists($_FILES['book_cover']['tmp_name'])){
                 $target_dir = "static/images/";
-                $target_file = $target_dir .time().basename($_FILES["bookcover"]["name"]);
-                $uploadOk = 1;
-                $imageFileType = strtolower(pathinfo($target_file, PATHINFO_EXTENSION));
+                $target_file = $target_dir .time().basename($_FILES["book_cover"]["name"]);
+                $upload_ok = 1;
+                $image_file_type = strtolower(pathinfo($target_file, PATHINFO_EXTENSION));
         
                 // Check if image file is a actual image or fake image
                 if (isset($_POST["submit"])) {
-                    $check = getimagesize($_FILES["bookcover"]["tmp_name"]);
+                    $check = getimagesize($_FILES["book_cover"]["tmp_name"]);
                     if ($check !== false) {
                         echo "File is an image - " . $check["mime"] . ".";
-                        $uploadOk = 1;
+                        $upload_ok = 1;
                     } else {
                         echo "File is not an image.";
-                        $uploadOk = 0;
+                        $upload_ok = 0;
                     }
                 }
         
                 // Check if file already exists
                 if (file_exists($target_file)) {
                     echo "Sorry, file already exists.";
-                    $uploadOk = 0;
+                    $upload_ok = 0;
                 }
         
                 // Check file size
-                if ($_FILES["bookcover"]["size"] > 1000000) {
+                if ($_FILES["book_cover"]["size"] > 1000000) {
                     echo "Sorry, your file is too large.";
-                    $uploadOk = 0;
+                    $upload_ok = 0;
                 }
         
                 // Allow certain file formats
                 if (
-                    $imageFileType != "jpg" && $imageFileType != "png" && $imageFileType != "jpeg"
-                    && $imageFileType != "gif"
+                    $image_file_type != "jpg" && $image_file_type != "png" && $image_file_type != "jpeg"
+                    && $image_file_type != "gif"
                 ) {
                     echo "Sorry, only JPG, JPEG, PNG & GIF files are allowed.";
-                    $uploadOk = 0;
+                    $upload_ok = 0;
                 }
         
-                // Check if $uploadOk is set to 0 by an error
-                if ($uploadOk == 0) {
+                // Check if $upload_ok is set to 0 by an error
+                if ($upload_ok == 0) {
                     echo "Sorry, your file was not uploaded.";
                     // if everything is ok, try to upload file
                 } else {
-                    if (move_uploaded_file($_FILES["bookcover"]["tmp_name"], $target_file)) {
-                        // echo "The file " . htmlspecialchars(basename($_FILES["bookcover"]["name"])) . " has been uploaded.";
-                        $imgsrc = $target_file;
+                    if (move_uploaded_file($_FILES["book_cover"]["tmp_name"], $target_file)) {
+                        // echo "The file " . htmlspecialchars(basename($_FILES["book_cover"]["name"])) . " has been uploaded.";
+                        $img_src = $target_file;
                         $isbn = $_POST["isbn"];
-                        $bookname = $_POST["bookname"];
+                        $book_name = $_POST["book_name"];
                         $copies = $_POST["copies"];
-                        $bookdescription = $_POST["bookdescription"];
+                        $book_description = $_POST["book_description"];
     
-                        \Model\Books::editbook($isbn, $bookname, $imgsrc, $bookdescription, $copies);
+                        \Model\Books::editBook($isbn, $book_name, $img_src, $book_description, $copies);
                         echo 'Edit Successful.';
                     } else {
                         echo "Sorry, there was an error in adding book.";
@@ -68,11 +69,11 @@ class Editbook{
                 }
             }else{
                 $isbn = $_POST["isbn"];
-                $bookname = $_POST["bookname"];
+                $bookname = $_POST["book_name"];
                 $copies = $_POST["copies"];
-                $bookdescription = $_POST["bookdescription"];
+                $bookdescription = $_POST["book_description"];
     
-                \Model\Books::editbook($isbn, $bookname, Null, $bookdescription, $copies);
+                \Model\Books::editBook($isbn, $bookname, Null, $bookdescription, $copies);
                 echo 'Edit Successful.'; 
             }
         }

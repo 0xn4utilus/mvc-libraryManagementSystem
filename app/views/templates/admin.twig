@@ -48,13 +48,13 @@
         }
     </script>
     <style>
-        .totalbooks {
+        .total_books {
             display: flex;
             flex-wrap: wrap;
             flex-direction: row;
         }
         
-        .totalbooks>div {
+        .total_books>div {
             margin-top: 2%;
             margin-bottom: 2%;
             margin-right: 5%;
@@ -129,15 +129,15 @@
                 <div class="modal-body mx-3">
                     <form action="/changePassword" method="POST">
                         <div class="form-group">
-                            <label for="currPass">Current Password</label>
-                            <input type="text" class="form-control" id="currPass" name="currPass" placeholder="Current Password"> </div>
+                            <label for="current_password">Current Password</label>
+                            <input type="text" class="form-control" id="current_password" name="current_password" placeholder="Current Password"> </div>
                         <div class="form-group">
-                            <label for="newPass">Password</label>
-                            <input type="password" class="form-control" id="newPass" name="newPass" placeholder="New Password">
+                            <label for="new_password">Password</label>
+                            <input type="password" class="form-control" id="new_password" name="new_password" placeholder="New Password">
                         </div>
                         <div class="form-group">
-                            <label for="newPassC">Confirm Password</label>
-                            <input type="password" class="form-control" id="newPassC" name="newPassC" placeholder="Confirm Password">
+                            <label for="new_password_confirm">Confirm Password</label>
+                            <input type="password" class="form-control" id="new_password_confirm" name="new_password_confirm" placeholder="Confirm Password">
                         </div>
                         <button type="submit" class="btn btn-primary">Submit</button>
                     </form>
@@ -166,13 +166,13 @@
                         </div>
                         <div class="form-group">
                             <label for="bookname">Book Name:</label>
-                            <input type="text" class="form-control" id="booknameEdit" placeholder="Enter Book name" name="bookname">
+                            <input type="text" class="form-control" id="booknameEdit" placeholder="Enter Book name" name="book_name">
                             <div class="valid-feedback"></div>
                             <div class="invalid-feedback">Required.</div>
                         </div>
                         <div class="form-group">
                             <label for="bookdescription">Book Description:</label>
-                            <textarea class="form-control" id="bookdescriptionEdit" placeholder="Enter Book Description" name="bookdescription"></textarea>
+                            <textarea class="form-control" id="bookdescriptionEdit" placeholder="Enter Book Description" name="book_description"></textarea>
                             <div class="valid-feedback"></div>
                             <div class="invalid-feedback">Required.</div>
                         </div>
@@ -183,8 +183,8 @@
                             <div class="invalid-feedback">Required.</div>
                         </div>
                         <div class="form-group">
-                            <label for="bookcover">Bookcover:</label>
-                            <input type="file" accept='image/*' class="form-control" id="bookcoverEdit" placeholder="Upload image" name="bookcover">
+                            <label for="book_cover">Bookcover:</label>
+                            <input type="file" accept='image/*' class="form-control" id="bookcoverEdit" placeholder="Upload image" name="book_cover">
                             <div class="valid-feedback"></div>
                             <div class="invalid-feedback">Please Upload Book cover.</div>
 
@@ -217,7 +217,7 @@
                         </div>
                         <div class="form-group">
                             <label for="bookname">Book Name:</label>
-                            <input type="text" class="form-control" id="booknameDelete" placeholder="Enter Book name" name="bookname" readonly>
+                            <input type="text" class="form-control" id="booknameDelete" placeholder="Enter Book name" name="book_name" readonly>
                             <div class="valid-feedback"></div>
                             <div class="invalid-feedback">Required.</div>
                         </div>
@@ -235,11 +235,11 @@
     <div class="tab-content" id="myTabContent">
         <div class="tab-pane fade show active" id="viewBooks" role="tabpanel" aria-labelledby="viewBooks-tab">
             <center>
-                <div class="totalbooks">
+                <div class="total_books">
                     
-                {%if totalbooks != Null%}
+                {%if total_books != Null%}
         
-                    {%for data in totalbooks%}
+                    {%for data in total_books%}
                         <div class="card" style="width: 18rem; ">
                             <img src=" {{data.bookcoverpath}}" style="width:18em; height: 24em" class="card-img-top" alt="{{data.bookname}}">
                             <div class="card-body">
@@ -285,13 +285,13 @@
                 </div>
                 <div class="form-group">
                     <label for="bookname">Book Name:</label>
-                    <input type="text" class="form-control" id="bookname" placeholder="Enter Book name" name="bookname" required>
+                    <input type="text" class="form-control" id="bookname" placeholder="Enter Book name" name="book_name" required>
                     <div class="valid-feedback"></div>
                     <div class="invalid-feedback">Required.</div>
                 </div>
                 <div class="form-group">
                     <label for="bookdescription">Book Description:</label>
-                    <textarea class="form-control" id="bookdescription" placeholder="Enter Book Description" name="bookdescription" required></textarea>
+                    <textarea class="form-control" id="bookdescription" placeholder="Enter Book Description" name="book_description" required></textarea>
                     <div class="valid-feedback"></div>
                     <div class="invalid-feedback">Required.</div>
                 </div>
@@ -302,8 +302,8 @@
                     <div class="invalid-feedback">Required.</div>
                 </div>
                 <div class="form-group">
-                    <label for="bookcover">Bookcover:</label>
-                    <input type="file" accept='image/*' class="form-control" id="bookcover" placeholder="Upload image" name="bookcover" required>
+                    <label for="book_cover">Bookcover:</label>
+                    <input type="file" accept='image/*' class="form-control" id="book_cover" placeholder="Upload image" name="book_cover" required>
                     <div class="valid-feedback"></div>
                     <div class="invalid-feedback">Please Upload Book cover.</div>
 
@@ -325,8 +325,8 @@
                         <th>Approve</th>
                     </tr>
                     {%set i=1%}
-                    {%if approverequests != Null%}
-                        {%for data in approverequests%}
+                    {%if approve_requests != Null%}
+                        {%for data in approve_requests%}
                         <tr>
                             <td>
                                 {{i}}
@@ -373,8 +373,8 @@
                         <th>Accept</th>
                     </tr>
                     {%set i=1%}
-                    {%if approvereturns != Null%}
-                        {%for data in approvereturns%}
+                    {%if approve_returns != Null%}
+                        {%for data in approve_returns%}
                         <tr>
                             <td>
                                 {{i}}

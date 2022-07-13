@@ -5,14 +5,14 @@ namespace Controller;
 class Admin{
     public function get(){
         session_start();
-        if(\Model\User::is_admin($_SESSION['uname'])==0){
+        if(\Model\User::isAdmin($_SESSION['uname'])==0){
             header('Location: /');
         }else{
             echo \View\Loader::make()->render("templates/admin.twig", array(
-                "totalbooks" => \Model\Books::total_books(),
+                "total_books" => \Model\Books::totalBooks(),
                 "uname" => $_SESSION['uname'],
-                "approverequests"=> \Model\Books::approverequests($_SESSION['uname']),
-                "approvereturns"=>\Model\Books::approvereturns($_SESSION['uname']),
+                "approve_requests"=> \Model\Books::approveRequests($_SESSION['uname']),
+                "approve_returns"=>\Model\Books::approveReturns($_SESSION['uname']),
             ));
         }
 
