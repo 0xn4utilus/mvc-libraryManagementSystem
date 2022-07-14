@@ -12,7 +12,7 @@ composer dump-autoload
 * Run the `setup.sh`.
 
 # vhost-setup
-Using apache2
+Using apache2(2.4.41)
 
 * Make a new file named `<Domain Name>.conf` in `/etc/apache2/sites-allowed`
 * Paste the content from `sample-vhost.conf` into the file created earlier and edit the suggested data
