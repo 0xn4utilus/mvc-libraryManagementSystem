@@ -7,16 +7,16 @@ class Home {
         session_start();
         
         if (isset($_COOKIE["sessionId"])){
-            // $_SESSION['uname']
+            // $_SESSION['username']
             $res = \Model\User::authenticateCookie($_COOKIE["sessionId"]);
             
             if(isset($res[0])){
-                $_SESSION['admin'] = \Model\User::isAdmin($res[0]['uname']);
-                $_SESSION['uname']= $res[0]['uname'];
+                $_SESSION['admin'] = \Model\User::isAdmin($res[0]['username']);
+                $_SESSION['username']= $res[0]['username'];
             }
         }
 
-        if (isset($_SESSION['uname'])){
+        if (isset($_SESSION['username'])){
             header('Location: /user');
         }else{
             echo \View\Loader::make()->render("templates/index.twig", array(

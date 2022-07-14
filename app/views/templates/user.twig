@@ -35,7 +35,7 @@
         </ul>
         <div class="dropdown m-lg-1 dropdown-menu-lg-end" style="padding-right:3rem;">
             <button class="btn btn-sm btn-outline-light dropdown-toggle" type="button" data-bs-display="static" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                Logged in as {{uname}}    
+                Logged in as {{username}}    
             </button>
             <div class="dropdown-menu " aria-labelledby="dropdownMenuButton">
 
@@ -69,11 +69,11 @@
                 {%if total_books!=Null%}
                     {%for data in total_books%}
                         <div class="card" style="width: 300px; ">
-                            <img src="{{data.bookcoverpath}}" style="width:300px; height: 400px" class="card-img-top" alt="{{data.bookname}}">
+                            <img src="{{data.book_cover_path}}" style="width:300px; height: 400px" class="card-img-top" alt="{{data.book_name}}">
                             <div class="card-body">
                                 <center>
                                     <h3 class="card-title" style="color: rgb(62, 134, 230);">
-                                        {{data.bookname}}
+                                        {{data.book_name}}
                                     </h3>
                                 </center>
 
@@ -83,9 +83,9 @@
                                 <p class="card-text">Copies:
                                     {{data.copies}}
                                 </p>
-                                {%if data.bookdescription != Null%}
+                                {%if data.book_description != Null%}
                                     <p class="card-text">Description:
-                                        {{data.bookdescription}}<br></p>
+                                        {{data.book_description}}<br></p>
                                 {%endif%}
                             </div>
                         </div>
@@ -119,13 +119,13 @@
                             </td>
                             {%set i=i+1%}
                             <td>
-                                <img src="{{data.bookcoverpath}}" style="width:150px; height: 200px" class="card-img-top" alt="{{data.bookname}}">
+                                <img src="{{data.book_cover_path}}" style="width:150px; height: 200px" class="card-img-top" alt="{{data.book_name}}">
                             </td>
                             <td>
                                 {{data.isbn}}
                             </td>
                             <td>
-                                {{data.bookname}}
+                                {{data.book_name}}
                             </td>
                             <td>
                                 <form action="/newissue" method="POST"><input type="text" value="{{data.isbn}}" name="isbn" readonly style="display:none;"> <input type="submit" class="btn-primary" value="Issue"></form>
@@ -163,13 +163,13 @@
                             </td>
                             {%set i=i+1%}
                             <td>
-                                <img src="{{data.bookcoverpath}}" style="width:150px; height: 200px" class="card-img-top" alt="{{data.bookname}}">
+                                <img src="{{data.book_cover_path}}" style="width:150px; height: 200px" class="card-img-top" alt="{{data.book_name}}">
                             </td>
                             <td>
                                 {{data.isbn}}
                             </td>
                             <td>
-                                {{data.bookname}}
+                                {{data.book_name}}
                             </td>
                             <td>
                                 <form action="/newreturn" method="POST"><input type="text" value="{{data.isbn}}" name="isbn" readonly style="display:none;"> <input type="submit" class="btn-danger" value="Return"></form>

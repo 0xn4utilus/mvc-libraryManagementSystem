@@ -7,7 +7,7 @@ class DeleteBook{
         session_start();
         
         
-        if(\Model\User::isAdmin($_SESSION['uname'])==0){
+        if(\Model\User::isAdmin($_SESSION['username'])==0){
             header('Location: /');
         }else{
             $isbn = $_POST['isbn'];

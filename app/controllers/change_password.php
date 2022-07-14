@@ -14,13 +14,13 @@ class ChangePassword{
     }elseif($new_password_confirm!= $new_password){
         echo "Passwords doesn't match";
         return;
-    }elseif(!\Controller\Utils::authenticateUser($_SESSION['uname'],$current_password)){
+    }elseif(!\Controller\Utils::authenticateUser($_SESSION['username'],$current_password)){
         echo "Incorrect Password!";
     }else{
         $salt = bin2hex(random_bytes(4));
         $hash= hash("sha256",$new_password.$salt);
         $hash= \Model\User::getHash($new_password,$salt);
-        \Model\User::changePassword($_SESSION['uname'],$salt,$hash);
+        \Model\User::changePassword($_SESSION['username'],$salt,$hash);
         echo "Password Changed successfully.";
     }
  }

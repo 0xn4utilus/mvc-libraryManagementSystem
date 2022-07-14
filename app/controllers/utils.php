@@ -3,8 +3,8 @@
 namespace Controller;
 
 class Utils{
-    public static function authenticateUser($uname,$password){
-        $rows = \Model\User::getUser($uname);
+    public static function authenticateUser($username,$password){
+        $rows = \Model\User::getUser($username);
         if(!isset($rows[0])){
             return FALSE;
         }
@@ -14,8 +14,8 @@ class Utils{
         return FALSE;
     }
 
-    public static function userExists($uname){
-        $rows = \Model\User::getUser($uname);
+    public static function userExists($username){
+        $rows = \Model\User::getUser($username);
         if(!isset($rows[0])){
             return FALSE;
         }

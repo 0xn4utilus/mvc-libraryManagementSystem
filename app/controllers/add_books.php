@@ -7,7 +7,7 @@ class AddBooks
     public static function post()
     {
         session_start();
-        if(\Model\User::isAdmin($_SESSION['uname'])==0){
+        if(\Model\User::isAdmin($_SESSION['username'])==0){
             // header('Location: /');
             echo 'hii0';
         }else{

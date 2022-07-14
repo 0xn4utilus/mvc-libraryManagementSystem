@@ -6,7 +6,7 @@ class EditBook{
     public static function post(){
         session_start();
 
-        if(\Model\User::isAdmin($_SESSION['uname'])==0){
+        if(\Model\User::isAdmin($_SESSION['username'])==0){
             header('Location: /');
         }else{
             if(file_exists($_FILES['book_cover']['tmp_name'])){
@@ -69,11 +69,11 @@ class EditBook{
                 }
             }else{
                 $isbn = $_POST["isbn"];
-                $bookname = $_POST["book_name"];
+                $book_name = $_POST["book_name"];
                 $copies = $_POST["copies"];
-                $bookdescription = $_POST["book_description"];
+                $book_description = $_POST["book_description"];
     
-                \Model\Books::editBook($isbn, $bookname, Null, $bookdescription, $copies);
+                \Model\Books::editBook($isbn, $book_name, Null, $book_description, $copies);
                 echo 'Edit Successful.'; 
             }
         }

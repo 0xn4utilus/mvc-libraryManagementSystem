@@ -24,9 +24,9 @@ DROP TABLE IF EXISTS `books`;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `books` (
   `isbn` char(13) NOT NULL,
-  `bookname` varchar(256) NOT NULL,
-  `bookcoverpath` varchar(256) NOT NULL,
-  `bookdescription` text,
+  `book_name` varchar(256) NOT NULL,
+  `book_cover_path` varchar(256) NOT NULL,
+  `book_description` text,
   `copies` int unsigned NOT NULL,
   PRIMARY KEY (`isbn`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
@@ -51,7 +51,7 @@ DROP TABLE IF EXISTS `cookies`;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `cookies` (
   `sessionId` varchar(256) NOT NULL,
-  `uname` varchar(256) NOT NULL
+  `username` varchar(256) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -66,26 +66,26 @@ INSERT INTO `cookies` VALUES ('SCvLCvWqFjCCN9rpXessrg==','admin'),('xV0ntgcqazTI
 UNLOCK TABLES;
 
 --
--- Table structure for table `issuedbooks`
+-- Table structure for table `issued_books`
 --
 
-DROP TABLE IF EXISTS `issuedbooks`;
+DROP TABLE IF EXISTS `issued_books`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `issuedbooks` (
+CREATE TABLE `issued_books` (
   `isbn` char(13) NOT NULL,
-  `uname` varchar(256) NOT NULL
+  `username` varchar(256) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `issuedbooks`
+-- Dumping data for table `issued_books`
 --
 
-LOCK TABLES `issuedbooks` WRITE;
-/*!40000 ALTER TABLE `issuedbooks` DISABLE KEYS */;
-INSERT INTO `issuedbooks` VALUES ('213dsd','rt'),('23sdf','rt'),('12','aa');
-/*!40000 ALTER TABLE `issuedbooks` ENABLE KEYS */;
+LOCK TABLES `issued_books` WRITE;
+/*!40000 ALTER TABLE `issued_books` DISABLE KEYS */;
+INSERT INTO `issued_books` VALUES ('213dsd','rt'),('23sdf','rt'),('12','aa');
+/*!40000 ALTER TABLE `issued_books` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -97,7 +97,7 @@ DROP TABLE IF EXISTS `requests`;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `requests` (
   `isbn` char(13) DEFAULT NULL,
-  `uname` varchar(256) DEFAULT NULL,
+  `username` varchar(256) DEFAULT NULL,
   `status` varchar(20) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -120,11 +120,11 @@ DROP TABLE IF EXISTS `users`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `users` (
-  `uname` varchar(256) NOT NULL,
+  `username` varchar(256) NOT NULL,
   `salt` varchar(12) NOT NULL,
   `password` varchar(65) NOT NULL,
   `admin` tinyint(1) NOT NULL,
-  PRIMARY KEY (`uname`)
+  PRIMARY KEY (`username`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 

@@ -35,16 +35,16 @@
             }, false);
         })();
 
-        function editbook(isbn, bookname, bookdescription, copies) {
+        function editbook(isbn, book_name, book_description, copies) {
             document.getElementById("isbnEdit").value = isbn;
-            document.getElementById("booknameEdit").value = bookname;
-            document.getElementById("bookdescriptionEdit").value = bookdescription;
+            document.getElementById("booknameEdit").value = book_name;
+            document.getElementById("bookdescriptionEdit").value = book_description;
             document.getElementById("copiesEdit").value = copies;
         }
 
-        function deletebook(isbn, bookname) {
+        function deletebook(isbn, book_name) {
             document.getElementById("isbnDelete").value = isbn;
-            document.getElementById("booknameDelete").value = bookname;
+            document.getElementById("booknameDelete").value = book_name;
         }
     </script>
     <style>
@@ -85,7 +85,7 @@
         </ul>
         <div class="dropdown m-lg-1 dropdown-menu-lg-end" style="padding-right:3rem;">
             <button class="btn btn-sm btn-outline-light dropdown-toggle" type="button" data-bs-display="static" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                Logged in as {{uname}}    
+                Logged in as {{username}}    
             </button>
             <div class="dropdown-menu " aria-labelledby="dropdownMenuButton">
 
@@ -165,13 +165,13 @@
                             <div class="invalid-feedback">Required.</div>
                         </div>
                         <div class="form-group">
-                            <label for="bookname">Book Name:</label>
+                            <label for="book_name">Book Name:</label>
                             <input type="text" class="form-control" id="booknameEdit" placeholder="Enter Book name" name="book_name">
                             <div class="valid-feedback"></div>
                             <div class="invalid-feedback">Required.</div>
                         </div>
                         <div class="form-group">
-                            <label for="bookdescription">Book Description:</label>
+                            <label for="book_description">Book Description:</label>
                             <textarea class="form-control" id="bookdescriptionEdit" placeholder="Enter Book Description" name="book_description"></textarea>
                             <div class="valid-feedback"></div>
                             <div class="invalid-feedback">Required.</div>
@@ -216,7 +216,7 @@
                             <div class="invalid-feedback">Required.</div>
                         </div>
                         <div class="form-group">
-                            <label for="bookname">Book Name:</label>
+                            <label for="book_name">Book Name:</label>
                             <input type="text" class="form-control" id="booknameDelete" placeholder="Enter Book name" name="book_name" readonly>
                             <div class="valid-feedback"></div>
                             <div class="invalid-feedback">Required.</div>
@@ -241,11 +241,11 @@
         
                     {%for data in total_books%}
                         <div class="card" style="width: 18rem; ">
-                            <img src=" {{data.bookcoverpath}}" style="width:18em; height: 24em" class="card-img-top" alt="{{data.bookname}}">
+                            <img src=" {{data.book_cover_path}}" style="width:18em; height: 24em" class="card-img-top" alt="{{data.book_name}}">
                             <div class="card-body">
                                 <center>
                                     <h3 class="card-title" style="color: rgb(62, 134, 230);">
-                                         {{data.bookname}}
+                                         {{data.book_name}}
                                     </h3>
                                 </center>
 
@@ -256,12 +256,12 @@
                                      {{data.copies}}
                                 </p>
                                 <p class="card-text">
-                                    <button class="btn-primary" data-toggle="modal" data-target="#modalEdit" value="{{data.isbn}}" onclick="editbook('{{data.isbn}}','{{data.bookname}}','{{data.bookdescription}}','{{data.copies}}')">Edit</button>
-                                    <button class="btn-danger" data-toggle="modal" data-target="#modalDelete" value="{{data.isbn}}" onclick="deletebook('{{data.isbn}}','{{data.bookname}}')">Delete</button>
+                                    <button class="btn-primary" data-toggle="modal" data-target="#modalEdit" value="{{data.isbn}}" onclick="editbook('{{data.isbn}}','{{data.book_name}}','{{data.book_description}}','{{data.copies}}')">Edit</button>
+                                    <button class="btn-danger" data-toggle="modal" data-target="#modalDelete" value="{{data.isbn}}" onclick="deletebook('{{data.isbn}}','{{data.book_name}}')">Delete</button>
                                 </p>
-                                {%if (data.bookdescription != Null)%}
+                                {%if (data.book_description != Null)%}
                                     <p class="card-text">Description:
-                                        {{data.bookdescription}}<br></p>
+                                        {{data.book_description}}<br></p>
                                 {% endif %}
                             </div>
                         </div>
@@ -284,14 +284,14 @@
                     <div class="invalid-feedback">Required.</div>
                 </div>
                 <div class="form-group">
-                    <label for="bookname">Book Name:</label>
-                    <input type="text" class="form-control" id="bookname" placeholder="Enter Book name" name="book_name" required>
+                    <label for="book_name">Book Name:</label>
+                    <input type="text" class="form-control" id="book_name" placeholder="Enter Book name" name="book_name" required>
                     <div class="valid-feedback"></div>
                     <div class="invalid-feedback">Required.</div>
                 </div>
                 <div class="form-group">
-                    <label for="bookdescription">Book Description:</label>
-                    <textarea class="form-control" id="bookdescription" placeholder="Enter Book Description" name="book_description" required></textarea>
+                    <label for="book_description">Book Description:</label>
+                    <textarea class="form-control" id="book_description" placeholder="Enter Book Description" name="book_description" required></textarea>
                     <div class="valid-feedback"></div>
                     <div class="invalid-feedback">Required.</div>
                 </div>
@@ -333,19 +333,19 @@
                             </td>
                             {%set i=i+1%}
                             <td>
-                                {{data.uname}}
+                                {{data.username}}
                             </td>
                             <td>
-                                <img src="{{data.bookcoverpath}}" style="width:150px; height: 200px" class="card-img-top" alt="{{data.bookname}}">
+                                <img src="{{data.book_cover_path}}" style="width:150px; height: 200px" class="card-img-top" alt="{{data.book_name}}">
                             </td>
                             <td>
                                 {{data.isbn}}
                             </td>
                             <td>
-                                {{data.bookname}}
+                                {{data.book_name}}
                             </td>
                             <td>
-                                <form action="/approveissues" method="POST"><input type="text" value="{{data.isbn}}" name="isbn" readonly style="display:none;"> <input type="text" value="{{data.uname}}" name="uname" readonly style="display:none;"> <input type="submit" class="btn-success" value="Approve"></form>
+                                <form action="/approveissues" method="POST"><input type="text" value="{{data.isbn}}" name="isbn" readonly style="display:none;"> <input type="text" value="{{data.username}}" name="username" readonly style="display:none;"> <input type="submit" class="btn-success" value="Approve"></form>
                             </td>
                         </tr>
                         {% endfor %}
@@ -381,19 +381,19 @@
                             </td>
                             {%set i=i+1%}
                             <td>
-                                {{data.uname}}
+                                {{data.username}}
                             </td>
                             <td>
-                                <img src="{{data.bookcoverpath}}" style="width:150px; height: 200px" class="card-img-top" alt="{{data.bookname}}">
+                                <img src="{{data.book_cover_path}}" style="width:150px; height: 200px" class="card-img-top" alt="{{data.book_name}}">
                             </td>
                             <td>
                                 {{data.isbn}}
                             </td>
                             <td>
-                                {{data.bookname}}
+                                {{data.book_name}}
                             </td>
                             <td>
-                                <form action="/approvereturns" method="POST"><input type="text" value="{{data.isbn}}" name="isbn" readonly style="display:none;"> <input type="text" value="{{data.uname}}" name="uname" readonly style="display:none;"> <input type="submit" class="btn-success" value="Accept"></form>
+                                <form action="/approvereturns" method="POST"><input type="text" value="{{data.isbn}}" name="isbn" readonly style="display:none;"> <input type="text" value="{{data.username}}" name="username" readonly style="display:none;"> <input type="submit" class="btn-success" value="Accept"></form>
                             </td>
                         </tr>
                         {% endfor %}

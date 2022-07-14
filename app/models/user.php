@@ -15,26 +15,26 @@ class User {
         
         return $row;
     }
-    public static function isAdmin($uname){
+    public static function isAdmin($username){
         $db = \DB::getInstance();
-        $statement = $db->prepare("SELECT * FROM users where uname = ?");
-        $statement->execute([$uname]);
+        $statement = $db->prepare("SELECT * FROM users where username = ?");
+        $statement->execute([$username]);
         $row  = $statement->fetchAll();
         return $row[0]['admin'];
     }
 
-    public static function getUser($uname){
+    public static function getUser($username){
         $db = \DB::getInstance();
-        $statement = $db->prepare("SELECT * FROM users where uname = ?");
-        $statement->execute([$uname]);
+        $statement = $db->prepare("SELECT * FROM users where username = ?");
+        $statement->execute([$username]);
         $rows  = $statement->fetchAll();
         return $rows;
     }
 
-    public static function newCookie($sessionId,$uname){
+    public static function newCookie($sessionId,$username){
         $db = \DB::getInstance();
         $statement = $db->prepare("insert into cookies values(?,?)");
-        $statement->execute([$sessionId,$uname]);
+        $statement->execute([$sessionId,$username]);
     }
     public static function destroyCookie($sessionId){
         $db = \DB::getInstance();
@@ -42,15 +42,15 @@ class User {
         $statement->execute([$sessionId]);
     }
 
-    public static function newUser($uname,$salt,$hash){
+    public static function newUser($username,$salt,$hash){
         $db = \DB::getInstance();
         $statement = $db->prepare("INSERT INTO users VALUES(?,?,?,0)");
-        $statement->execute([$uname,$salt,$hash]);
+        $statement->execute([$username,$salt,$hash]);
     }
 
-    public static function changePassword($uname,$salt,$hash){
+    public static function changePassword($username,$salt,$hash){
         $db = \DB::getInstance();
-        $statement = $db->prepare("update users set salt = ?, password = ? where uname=?");
-        $statement->execute([$salt,$hash,$uname]);
+        $statement = $db->prepare("update users set salt = ?, password = ? where username=?");
+        $statement->execute([$salt,$hash,$username]);
     }
 }
