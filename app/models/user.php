@@ -9,15 +9,14 @@ class User {
 
     public static function authenticateCookie($x){
         $db = \DB::getInstance();
-        $statement = $db->prepare("SELECT * FROM cookies where sessionId = ?");
+        $statement = $db->prepare("SELECT sessionId,username FROM cookies where sessionId = ?");
         $statement->execute([$x]);
         $row  = $statement->fetchAll();
-        
         return $row;
     }
     public static function isAdmin($username){
         $db = \DB::getInstance();
-        $statement = $db->prepare("SELECT * FROM users where username = ?");
+        $statement = $db->prepare("SELECT username,salt,password,admin FROM users where username = ?");
         $statement->execute([$username]);
         $row  = $statement->fetchAll();
         return $row[0]['admin'];
@@ -25,7 +24,7 @@ class User {
 
     public static function getUser($username){
         $db = \DB::getInstance();
-        $statement = $db->prepare("SELECT * FROM users where username = ?");
+        $statement = $db->prepare("SELECT username,salt,password,admin FROM users where username = ?");
         $statement->execute([$username]);
         $rows  = $statement->fetchAll();
         return $rows;

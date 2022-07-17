@@ -5,28 +5,28 @@ namespace Model;
 class Books{
     public static function totalBooks(){
         $db = \DB::getInstance();
-        $statement = $db->prepare("SELECT * FROM books");
+        $statement = $db->prepare("SELECT isbn,book_name,book_cover_path,book_description,copies FROM books");
         $statement->execute();
         $rows  = $statement->fetchAll();
         return $rows;
     }
     public static function issuedBooks($username){
         $db = \DB::getInstance();
-        $statement = $db->prepare("SELECT books.* from books left join issued_books on issued_books.isbn = books.isbn and issued_books.username = ? where issued_books.isbn is not null");
+        $statement = $db->prepare("SELECT books.isbn,books.book_name,books.book_cover_path,books.book_description,books.copies from books left join issued_books on issued_books.isbn = books.isbn and issued_books.username = ? where issued_books.isbn is not null");
         $statement->execute([$username]);
         $rows  = $statement->fetchAll();
         return $rows;
     }
     public static function newIssueBooks($username){
         $db = \DB::getInstance();
-        $statement = $db->prepare("SELECT books.* from books left join issued_books on issued_books.isbn = books.isbn and issued_books.username = ? where issued_books.isbn is null and books.copies >0");
+        $statement = $db->prepare("SELECT books.isbn,books.book_name,books.book_cover_path,books.book_description,books.copies from books left join issued_books on issued_books.isbn = books.isbn and issued_books.username = ? where issued_books.isbn is null and books.copies >0");
         $statement->execute([$username]);
         $rows  = $statement->fetchAll();
         return $rows;
     }
     public static function approveRequests(){
         $db = \DB::getInstance();
-        $statement = $db->prepare("SELECT books.*, requests.username from books left join requests on books.isbn = requests.isbn and requests.status = 'issue' where requests.username is not null;");
+        $statement = $db->prepare("SELECT books.isbn,books.book_name,books.book_cover_path,books.book_description,books.copies, requests.username from books left join requests on books.isbn = requests.isbn and requests.status = 'issue' where requests.username is not null;");
         $statement->execute();
         $rows  = $statement->fetchAll();
         return $rows;
@@ -34,7 +34,7 @@ class Books{
 
     public static function approveReturns(){
         $db = \DB::getInstance();
-        $statement = $db->prepare("SELECT books.*, requests.username from books left join requests on books.isbn = requests.isbn and requests.status = 'return' where requests.username is not null");
+        $statement = $db->prepare("SELECT books.isbn,books.book_name,books.book_cover_path,books.book_description,books.copies, requests.username from books left join requests on books.isbn = requests.isbn and requests.status = 'return' where requests.username is not null");
         $statement->execute();
         $rows  = $statement->fetchAll();
         return $rows;
@@ -42,7 +42,7 @@ class Books{
 
     public static function getBookInfo($isbn){
         $db = \DB::getInstance();
-        $statement = $db->prepare("SELECT * from books where isbn = ?");
+        $statement = $db->prepare("SELECT isbn,book_name,book_cover_path,book_description,copies from books where isbn = ?");
         $statement->execute([$isbn]);
         $rows  = $statement->fetchAll();
         return $rows;
